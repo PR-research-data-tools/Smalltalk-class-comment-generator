@@ -1,6 +1,6 @@
 Class {
 	#name : #BaselineOfCommentGenerator,
-	#superclass : #Object,
+	#superclass : #BaselineOf,
 	#category : #BaselineOfCommentGenerator
 }
 

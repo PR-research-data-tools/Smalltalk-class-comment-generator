@@ -1,6 +1,8 @@
 # Smalltalk-class-comment-generator
-This tool attempts to generate a smalltalk class comment as shown in figure below ![](doc/comment-generation-process.png). 
-The comment contains information types based on the default Pharo template (Please see ![](doc/class-comment-template.png))
+
+- This tool attempts to generate a smalltalk class comment as shown in figure ![](doc/comment-generation-process.png). 
+
+- The comment contains information types based on the default Pharo template ![](doc/class-comment-template.png)
 
 ## Overview
 

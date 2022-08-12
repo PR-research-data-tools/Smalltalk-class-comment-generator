@@ -1,0 +1,1 @@
+# Smalltalk-class-comment-generator

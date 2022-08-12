@@ -12,14 +12,16 @@ The comment contains information types based on the default Pharo template (Plea
 [6. License](#license)
 
 ## Requirements
+
 - Pharo > 8.0
 
 ## Installation
 ```smalltalk
 Metacello new
-	baseline: 'CommentGenerator';
-	repository: 'github://PR-research-data-tools/Smalltalk-class-comment-generator:main/src';
-	load.
+baseline: 'CommentGenerator';
+repository: 'github://PR-research-data-tools/Smalltalk-class-comment-generator:main/src';
+load.
+```
 
 ## Usage
 
@@ -28,6 +30,7 @@ Metacello new
 cg := CommentGenerator new.
 cg targetClass: RSShape.
 cg generateDocument.
+```
 
 ## Development
 
@@ -43,28 +46,30 @@ It has two more important classes `CGIdentifier' and `CGFormatter' where the for
 
 These classes are used to extract important or relevant information about a method. 
 The visitor is setup by passing a method name (aSymbol).
-````smalltalk
+```smalltalk
 | method visitor |
    method := targetClass >> aSymbol.
    visitor := CGAccessorVisitor new.
    method ast acceptVisitor: visitor.
    visitor result
+   ```
 
 ### Get Class Streotypes
 
-````smalltalk
+```smalltalk
 |ci|
 ci := CGIdentifier new.
 ci targetClass: RSShape.
 ci getClassStereotype.
+```
 
 ### Get Method Streotypes
-````smalltalk
+```smalltalk
 |ci|
 ci := CGIdentifier new.
 ci targetClass: RSShape.
 ci getMethodStereotypes.
-
+```
 
 
 ## References

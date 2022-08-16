@@ -77,8 +77,9 @@ ci getMethodStereotypes.
 ## References
 
 - [Pharo](https://pharo.org/)
-- [Can We Automatically Generate Class Comments in Pharo?](https://scg.unibe.ch/archive/papers/Rani22b.pdf)
-- [Automatic generation of natural language summaries for java classes](https://ieeexplore.ieee.org/abstract/document/6613830)
+- [Paper: Can We Automatically Generate Class Comments in Pharo?](https://scg.unibe.ch/archive/papers/Rani22b.pdf)
+- [Replication paper: Automatic generation of natural language summaries for java classes](https://ieeexplore.ieee.org/abstract/document/6613830)
+- [replication package of the paper](https://doi.org/10.5281/zenodo.6622011)
 
 ## License
 

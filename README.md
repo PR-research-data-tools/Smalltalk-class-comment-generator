@@ -1,8 +1,8 @@
 # Smalltalk-class-comment-generator
 
-- This tool attempts to generate a smalltalk class comment as shown in figure ![](doc/comment-generation-process.png). 
+- This tool attempts to generate a Smalltalk class comment as shown in this figure: ![](doc/comment-generation-process.png)
 
-- The comment contains information types based on the default Pharo template ![](doc/class-comment-template.png)
+- The comment contains information types based on the default Pharo template: ![](doc/class-comment-template.png)
 
 ## Overview
 
@@ -41,13 +41,13 @@ There are various classes used to achieve class comment generation.
 
 ### Comment Generator classes
 
-CommentGenerator class is one of the important classes. The user can pass a class of interest in `targetClass' and pass `generateDocument' message to generate class comment for the class.
-It has two more important classes `CGIdentifier' and `CGFormatter' where the former contains most of the logic and latter formats the writestream output.
+CommentGenerator class is one of the important classes. The user can pass a class of interest in `targetClass` and pass `generateDocument` message to generate class comment for the class.
+It has two more important classes `CGIdentifier` and `CGFormatter` where the former contains most of the logic and latter formats the writestream output.
 
 ### Visitor classes
 
 These classes are used to extract important or relevant information about a method. 
-The visitor is setup by passing a method name (aSymbol).
+The visitor is set up by passing a method name (aSymbol).
 ```smalltalk
 | method visitor |
    method := targetClass >> aSymbol.
@@ -56,7 +56,7 @@ The visitor is setup by passing a method name (aSymbol).
    visitor result
    ```
 
-### Get Class Streotypes
+### Get Class Stereotypes
 
 ```smalltalk
 |ci|
@@ -65,7 +65,7 @@ ci targetClass: RSShape.
 ci getClassStereotype.
 ```
 
-### Get Method Streotypes
+### Get Method Stereotypes
 ```smalltalk
 |ci|
 ci := CGIdentifier new.

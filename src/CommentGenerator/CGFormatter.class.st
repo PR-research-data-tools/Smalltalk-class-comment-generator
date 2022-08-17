@@ -40,72 +40,20 @@ Class {
 	#superclass : #CommentGenerator,
 	#instVars : [
 		'identifier',
-		'mostUsedMethods'
+		'mostUsedMethods',
+		'descriptionDict'
 	],
 	#category : #'CommentGenerator-Core'
 }
 
 { #category : #formatters }
 CGFormatter >> classStereotypeDescriptionFor: aString [
+	^ descriptionDict at: aString ifAbsent: [ '' ]
+]
 
-	"Gets a String representing, and if there is a description for that string it returns a description"
-
-	aString = 'Boundary'
-		ifTrue: [ 
-			^ 'I function as a communication point between classes. I have a lot of collaborational methods but few controller and fewer factory methods.' ]
-		ifFalse: [ 
-			aString = 'Commander'
-				ifTrue: [ 
-				^ 'I encapsulate behavior. I have a lot of mutator methods.' ]
-				ifFalse: [ 
-					aString = 'Controller'
-						ifTrue: [ 
-							^ 'I process data from other class and access their functionalities. I have a multitude of controller methods.' ]
-						ifFalse: [ 
-							aString = 'Data'
-								ifTrue: [ 
-									^ 'I store data an do not operate on the data . I only contain get and set methods.' ]
-								ifFalse: [ 
-									aString = 'DataProvider'
-										ifTrue: [ 
-										^ 'I encapsulate data. I consist mostly  of accessor methods.' ]
-										ifFalse: [ 
-											aString = 'Degenerate'
-												ifTrue: [ 
-													^ 'I do nether read nor write data. I consist mostly of degenerate methods.' ]
-												ifFalse: [ 
-													aString = 'Empty'
-														ifTrue: [ 
-															^ 'I contain mostly empty or no methods.' ]
-														ifFalse: [ 
-															aString = 'Entity'
-																ifTrue: [ 
-																	^ 'I represent an Entity. I have Accessors and Mutators other than get and set, and I have twice as many collaborators compared to noncollaborators.' ]
-																ifFalse: [ 
-																	aString = 'Factory'
-																ifTrue: [ 
-																	^ 'I create objects. I am mostly made up of factory methods' ]
-																ifFalse: [ 
-																	aString = 'Large'
-																		ifTrue: [ 
-																			^ 'I have a lot of functionality and many lines of code and can maybe be refactored into multiple smaller classes.' ]
-																		ifFalse: [ 
-																			aString = 'Lazy'
-																				ifTrue: [ 
-																					^ 'I have very little functionality. I have some get and set methods and maybe a bigger part of degenerate methods.' ]
-																				ifFalse: [ 
-																					aString = 'MinimalEntity'
-																						ifTrue: [ 
-																							^ 'I am represent a smaller Entity. I only have get, set and mutator methods' ]
-																						ifFalse: [ 
-																							aString = 'PureController'
-																								ifTrue: [ 
-																									^ 'I exclusively work on external objects. All my methods are either factory or controller methods.' ]
-																								ifFalse: [ 
-																									aString = 'Small'
-																										ifTrue: [ 
-																											^ 'I only have up to 2 methods.' ]
-																										ifFalse: [  ] ] ] ] ] ] ] ] ] ] ] ] ] ]
+{ #category : #accessing }
+CGFormatter >> descriptionDict [
+	^ descriptionDict
 ]
 
 { #category : #formatters }
@@ -116,12 +64,12 @@ CGFormatter >> formatClassStereotypeOn: stream [
 	classStereotypes do: [ :stereotype | 
 		stereotype = '' ifTrue: [ 
 			^ stream nextPutAll:
-				  'There are no specific classStereotypes that match for me' ] ].
+				  'There are no specific class stereotypes that match for me' ] ].
 	classStereotypes isNotEmpty ifFalse: [ ^ self ].
 	stream nextPutAll: 'I have '.
 	classStereotypes size > 1
-		ifTrue: [ stream nextPutAll: 'classstereotypes: ' ]
-		ifFalse: [ stream nextPutAll: 'classstereotype: ' ].
+		ifTrue: [ stream nextPutAll: 'class stereotypes: ' ]
+		ifFalse: [ stream nextPutAll: 'class stereotype: ' ].
 	classStereotypes do: [ :value | 
 		stream
 			cr;
@@ -167,7 +115,7 @@ CGFormatter >> formatKeywordsOn: stream [
 		nextPutAll: 'My defining keywords are: ';
 		cr.
 	stream nextPutAll:
-		(',' join: (keywords copyFrom: 1 to: (10 min: keywords size)))
+		(', ' join: (keywords copyFrom: 1 to: (10 min: keywords size)))
 ]
 
 { #category : #formatters }
@@ -263,8 +211,36 @@ CGFormatter >> formatUsersOn: stream [
 
 { #category : #initialization }
 CGFormatter >> initialize [
-
 	super initialize.
+	self initializeDescriptionDict
+]
+
+{ #category : #accessing }
+CGFormatter >> initializeDescriptionDict [
+	descriptionDict := {'Boundary'
+				-> 'I function as a communication point between classes. I have a lot of collaborational methods but few controller and fewer factory methods.'.
+			'Commander' -> 'I encapsulate behavior. I have a lot of mutator methods.'.
+			'Controller'
+				-> 'I process data from other class and access their functionalities. I have a multitude of controller methods.'.
+			'Data'
+				-> 'I store data an do not operate on the data . I only contain get and set methods.'.
+			'DataProvider'
+				-> 'I encapsulate data. I consist mostly  of accessor methods.'.
+			'Degenerate'
+				-> 'I do nether read nor write data. I consist mostly of degenerate methods.'.
+			'Empty' -> 'I contain mostly empty or no methods.'.
+			'Entity'
+				-> 'I represent an Entity. I have Accessors and Mutators other than get and set, and I have twice as many collaborators compared to noncollaborators.'.
+			'Factory' -> 'I create objects. I am mostly made up of factory methods'.
+			'Large'
+				-> 'I have a lot of functionality and many lines of code and can maybe be refactored into multiple smaller classes.'.
+			'Lazy'
+				-> 'I have very little functionality. I have some get and set methods and maybe a bigger part of degenerate methods.'.
+			'MinimalEntity'
+				-> 'I am represent a smaller Entity. I only have get, set and mutator methods'.
+			'PureController'
+				-> 'I exclusively work on external objects. All my methods are either factory or controller methods.'.
+			'Small' -> 'I only have up to 2 methods.'} asDictionary
 ]
 
 { #category : #initialization }
